@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Login — LearnWise{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-5">
+        <h2 class="text-center mb-4 fw-bold" style="color: #1a2e2a;">Welcome Back</h2>
+        <p class="text-center text-muted mb-4">Log in to continue your learning journey</p>
+
+        <!-- ✅ NO "required" attributes — JavaScript handles validation -->
+        <form id="loginForm" method="POST">
+          <div class="mb-4">
+            <label class="form-label fw-semibold" style="color: #1a2e2a;">Email Address</label>
+            <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control form-control-lg"
+                    placeholder="Enter your email"
+                    style="border-radius: 12px; padding: 14px 18px;"
+            >
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold" style="color: #1a2e2a;">Password</label>
+            <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="form-control form-control-lg"
+                    placeholder="Enter your password"
+                    style="border-radius: 12px; padding: 14px 18px;"
+            >
+          </div>
+
+          <button
+                  type="submit"
+                  class="btn btn-primary w-100 btn-lg"
+                  style="background: #2d6b5e; border: none; border-radius: 12px; padding: 16px; font-weight: 600; font-size: 1.1rem;"
+          >
+            Log In
+          </button>
+        </form>
+
+        <p class="mt-4 mb-0 text-center" style="color: #4a6b63;">
+          No account yet?
+          <a href="{{ url_for('auth.register') }}" style="color: #2d6b5e; font-weight: 600; text-decoration: none;">
+            Create one now
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

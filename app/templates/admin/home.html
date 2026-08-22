@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Admin — LearnWise{% endblock %}
+
+{% block content %}
+
+<!-- Welcome Section -->
+<h2 class="display-heading mb-4">Admin dashboard</h2>
+
+<!-- Stats Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="lw-stat-card">
+      <div class="lw-stat-number">{{ stats.total_users }}</div>
+      <div class="lw-stat-label">Users</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="lw-stat-card">
+      <div class="lw-stat-number">{{ stats.total_courses }}</div>
+      <div class="lw-stat-label">Courses</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="lw-stat-card">
+      <div class="lw-stat-number">{{ stats.total_attempts }}</div>
+      <div class="lw-stat-label">Quiz attempts</div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <a href="{{ url_for('admin.courses') }}"
+       class="btn btn-primary btn-lg w-100 py-4"
+       style="font-size: 1.5rem; border-radius: 12px;">
+       Manage Courses
+    </a>
+  </div>
+  <div class="col-md-6">
+    <a href="{{ url_for('admin.users') }}"
+       class="btn btn-success btn-lg w-100 py-4"
+       style="font-size: 1.5rem; border-radius: 12px;">
+       View Users
+    </a>
+  </div>
+</div>
+
+
+{% endblock %}

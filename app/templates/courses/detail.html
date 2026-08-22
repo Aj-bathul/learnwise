@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block title %}{{ course.title }} — LearnWise{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="mb-2">{{ macros.difficulty_badge(course.difficulty_level) }}</div>
+    <h2 class="display-heading">{{ course.title }}</h2>
+    <p class="text-muted">{{ course.organization }} &middot; {{ course.category }}</p>
+    <p>{{ course.description }}</p>
+    {% if course.skills %}
+      <p><strong>Skills:</strong> {{ course.skills }}</p>
+    {% endif %}
+
+    <hr>
+    <h4 class="display-heading mb-3">Lessons</h4>
+    {% if course.lessons %}
+      <ul class="list-group mb-4">
+        {% for lesson in course.lessons|sort(attribute='order_index') %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ lesson.title }}
+            {% if is_enrolled %}
+              <a href="{{ url_for('courses.lesson_view', lesson_id=lesson.id) }}" class="btn btn-sm btn-outline-primary">Watch</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">Lessons for this course haven't been added yet.</p>
+    {% endif %}
+
+    {% if is_enrolled and course.quizzes %}
+      <div class="card">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <p class="mb-0 fw-semibold">{{ course.quizzes[0].title }}</p>
+          </div>
+          <a href="{{ url_for('quizzes.take', quiz_id=course.quizzes[0].id) }}" class="btn btn-primary">Take quiz</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        {% if course.rating %}<p class="font-monospace">★ {{ course.rating }} &middot; {{ course.review_count }} learners</p>{% endif %}
+        {% if is_enrolled %}
+          <button class="btn btn-success w-100" disabled>Enrolled ✓</button>
+        {% elif current_user.is_authenticated %}
+          <form method="POST" action="{{ url_for('courses.enroll', course_id=course.id) }}">
+            <button type="submit" class="btn btn-primary w-100">Enroll</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}" class="btn btn-primary w-100">Log in to enroll</a>
+        {% endif %}
+        {% if course.course_url %}
+          <a href="{{ course.course_url }}" target="_blank" class="btn btn-link w-100 mt-2">Original course page</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block title %}Quiz Result — LearnWise{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body p-4">
+    <h3 class="display-heading mb-3">Your result</h3>
+    <p class="mb-1">Score: <strong class="font-monospace">{{ attempt.correct_answers }}/{{ attempt.total_questions }}</strong> ({{ attempt.score_percent }}%)</p>
+    <p class="text-muted">Average time per question: <span class="font-monospace">{{ attempt.avg_answer_time_seconds }}s</span></p>
+
+    <hr class="my-4">
+
+    <p class="mb-2">Your next quiz on this topic will be served at:</p>
+    <div class="mb-2">{{ macros.difficulty_badge(attempt.predicted_next_difficulty) }}</div>
+
+
+    <a href="{{ url_for('dashboard.home') }}" class="btn btn-primary mt-4">Back to dashboard</a>
+  </div>
+</div>
+{% endblock %}

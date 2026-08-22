@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if course else 'New' }} Course — Admin{% endblock %}
+{% block content %}
+
+<style>
+  /* Simple styles a student would write */
+  body {
+    font-family: Arial, Helvetica, sans-serif; /* Old school font */
+  }
+  .student-form-box {
+    background-color: #fff;
+    border: 1px solid #ddd; /* Basic, slightly outdated border */
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee; /* Old-school underline */
+    padding-bottom: 10px;
+  }
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #444;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="container">
+  <h2>{{ 'Edit' if course else 'New' }} Course</h2>
+
+  <div class="student-form-box">
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label"><strong>Title</strong></label>
+        <input type="text" name="title" class="form-control" value="{{ course.title if course else '' }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Organization</strong></label>
+        <input type="text" name="organization" class="form-control" value="{{ course.organization if course else '' }}">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Category</strong></label>
+        <input type="text" name="category" class="form-control" value="{{ course.category if course else '' }}">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Difficulty level</strong></label>
+        <select name="difficulty_level" class="form-select">
+          {% for level in ['Beginner', 'Intermediate', 'Advanced', 'Mixed'] %}
+          <option value="{{ level }}" {% if course and course.difficulty_level == level %}selected{% endif %}>{{ level }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Description</strong></label>
+        <textarea name="description" class="form-control" rows="4">{{ course.description if course else '' }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Skills (comma-separated)</strong></label>
+        <input type="text" name="skills" class="form-control" value="{{ course.skills if course else '' }}" placeholder="e.g. Excel, Data Analysis">
+      </div>
+
+
+
+      <!-- Basic default Bootstrap Blue button, not custom teal -->
+      <button type="submit" class="btn btn-primary">{{ 'Save changes' if course else 'Create course' }}</button>
+      <br><br>
+    </form>
+  </div>
+
+  {% if course %}
+  <hr>
+
+  <div class="section-title">Lessons</div>
+  <div style="margin-bottom: 10px;">
+    <a href="{{ url_for('admin.lesson_new', course_id=course.id) }}" class="btn btn-success btn-sm">+ Add lesson</a>
+  </div>
+
+  <ul class="list-group mb-4">
+    {% for lesson in course.lessons|sort(attribute='order_index') %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ lesson.order_index }}. {{ lesson.title }}
+
+      <!-- Typical student messy spacing: just sticking buttons side by side with default padding -->
+      <div>
+        <a href="{{ url_for('admin.lesson_edit', lesson_id=lesson.id) }}" class="btn btn-outline-secondary btn-sm" style="margin-right: 5px;">Edit</a>
+
+        <form method="POST" action="{{ url_for('admin.lesson_delete', lesson_id=lesson.id) }}" onsubmit="return confirm('Delete this lesson?');" style="display:inline;">
+          <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+        </form>
+      </div>
+
+    </li>
+    {% else %}
+    <li class="list-group-item text-muted">No lessons yet.</li>
+    {% endfor %}
+  </ul>
+
+  <div class="section-title">Quizzes</div>
+  <div style="margin-bottom: 10px;">
+    <a href="{{ url_for('admin.quiz_new', course_id=course.id) }}" class="btn btn-success btn-sm">+ Add quiz</a>
+  </div>
+
+  <ul class="list-group">
+    {% for quiz in course.quizzes %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ quiz.title }} ({{ quiz.questions|length }} questions)
+      <a href="{{ url_for('admin.question_new', quiz_id=quiz.id) }}" class="btn btn-outline-secondary btn-sm">Manage questions</a>
+    </li>
+    {% else %}
+    <li class="list-group-item text-muted">No quizzes yet.</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+{% endblock %}

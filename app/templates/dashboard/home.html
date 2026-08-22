@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — LearnWise{% endblock %}
+{% block content %}
+<h2 class="display-heading mb-4">Welcome, {{ current_user.full_name }}</h2>
+
+{% if enrollments %}
+<div class="row g-3">
+  {% for e in enrollments %}
+  <div class="col-md-4">
+    <div class="card h-100 d-flex flex-column">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{ e.course.title }}</h5>
+        <p class="card-text text-muted small">{{ e.course.organization }}</p>
+
+        <div class="progress mb-2">
+          <div class="progress-bar" style="width: {{ e.progress_percent }}%;"></div>
+        </div>
+
+        <small class="font-monospace mb-3">{{ e.progress_percent }}% complete &middot; {{ e.status }}</small>
+
+        <!-- CTA Button -->
+        <div class="mt-auto">
+          {% if e.progress_percent >= 100 %}
+          <!-- Completed Course -->
+          <a href="{{ url_for('courses.detail', course_id=e.course.id) }}" class="btn btn-success btn-sm w-100">
+            &#10003; Review course
+          </a>
+          {% else %}
+          <!-- In-Progress Course -->
+          <a href="{{ url_for('courses.detail', course_id=e.course.id) }}" class="btn btn-primary btn-sm w-100">
+            Continue learning
+          </a>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>You haven't enrolled in any courses yet. <a href="{{ url_for('courses.browse') }}">Browse courses</a>.</p>
+{% endif %}
+{% endblock %}

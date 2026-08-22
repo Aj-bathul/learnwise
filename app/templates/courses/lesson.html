@@ -1,0 +1,65 @@
+@'
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.title }} — LearnWise{% endblock %}
+
+{% block content %}
+
+<p class="text-muted small mb-1">
+  <a href="{{ url_for('courses.detail', course_id=course.id) }}">← {{ course.title }}</a>
+</p>
+
+<h2 class="display-heading mb-3">{{ lesson.title }}</h2>
+
+<div class="card mb-3">
+  <div class="card-body p-0">
+    <div class="ratio ratio-16x9">
+      {% if embed_url %}
+      <iframe
+              src="{{ embed_url }}"
+              title="{{ lesson.title }}"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              frameborder="0">
+      </iframe>
+      {% else %}
+      <div class="d-flex align-items-center justify-content-center bg-dark text-white" style="height: 100%; min-height: 400px;">
+        <div class="text-center">
+          <div class="lw-ai-tag mb-2" style="border-color: rgba(255,255,255,0.4); color: #fff; background: rgba(255,255,255,0.1);">
+            No Video Available
+          </div>
+          <p class="mb-0">An admin can add a video from the Admin panel.</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if lesson.content %}
+<div class="card mb-4">
+  <div class="card-body">
+    <h6 class="text-muted text-uppercase small mb-2">Lesson notes</h6>
+    <p class="mb-0">{{ lesson.content }}</p>
+  </div>
+</div>
+{% endif %}
+
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+  <div>
+    <span class="text-muted small">Course progress: {{ enrollment.progress_percent }}%</span>
+    <div class="progress mt-1" style="width: 200px; height: 8px;">
+      <div class="progress-bar" style="width: {{ enrollment.progress_percent }}%;"></div>
+    </div>
+  </div>
+  <div>
+    {% if next_lesson %}
+    <a href="{{ url_for('courses.lesson_view', lesson_id=next_lesson.id) }}" class="btn btn-primary">Next lesson →</a>
+    {% elif quiz %}
+    <a href="{{ url_for('quizzes.take', quiz_id=quiz.id) }}" class="btn btn-primary">Take the quiz →</a>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+'@ | Out-File -FilePath templates\courses\lesson.html -Encoding utf8
