@@ -13,7 +13,7 @@
   --hard: #B54834;
   --radius: 8px;
 
-  /* Inter font for the system */
+
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -32,7 +32,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings - still Inter but bold */
 h1, h2, h3, h4, h5, .display-heading {
   font-family: var(--font-family);
   font-weight: 800;
@@ -40,7 +39,7 @@ h1, h2, h3, h4, h5, .display-heading {
   letter-spacing: -0.02em;
 }
 
-/* Navbar brand */
+
 .lw-brand {
   font-family: var(--font-family);
   font-weight: 800;
@@ -49,7 +48,7 @@ h1, h2, h3, h4, h5, .display-heading {
   letter-spacing: -0.02em;
 }
 
-/* Nav links */
+
 .lw-navbar .navbar-nav .nav-link {
   font-family: var(--font-family);
   font-weight: 500;
@@ -61,13 +60,13 @@ h1, h2, h3, h4, h5, .display-heading {
   color: #ffffff;
 }
 
-/* Card titles */
+
 .card-title {
   font-family: var(--font-family);
   font-weight: 700;
 }
 
-/* Buttons */
+
 .btn {
   font-family: var(--font-family);
   font-weight: 600;

@@ -16,8 +16,7 @@ LESSON_TEMPLATES = [
     "Final Project and Recap",
 ]
 
-# Generic question bank templates, tagged by difficulty.
-# {topic} is replaced with the course title for light personalisation.
+
 QUESTION_BANK = {
     "Easy": [
         {

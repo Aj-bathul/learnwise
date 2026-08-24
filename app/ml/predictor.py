@@ -7,20 +7,21 @@ from app.models import db, QuizAttempt, MLPrediction
 MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "difficulty_model.joblib")
 
 _model_cache = None
-_model_load_attempted = False
 
 
 def _load_model():
-    global _model_cache, _model_load_attempted
-    if _model_load_attempted:
+    global _model_cache
+    if _model_cache is not None:
         return _model_cache
-    _model_load_attempted = True
     if os.path.exists(MODEL_PATH):
         try:
             _model_cache = joblib.load(MODEL_PATH)
+            print(f"Model loaded successfully: {_model_cache.get('model_name', 'Unknown')}")
         except Exception as e:
             print(f"Model load failed: {e}")
             _model_cache = None
+    else:
+        print(f"Model file not found at path: {MODEL_PATH}")
     return _model_cache
 
 
@@ -68,9 +69,8 @@ def _predict_from_features(features):
     try:
         prediction = pipeline.predict(X)[0]
     except Exception as e:
-        print(f" Prediction failed: {e}")
+        print(f"Prediction failed: {e}")
         return None, None, "RuleBasedFallback"
-
 
     if isinstance(prediction, list):
         prediction = prediction[0] if prediction else "Medium"
@@ -94,7 +94,6 @@ def predict_difficulty(user_id, quiz_id):
 
     features, last_score = built
 
-
     print("="*60)
     print(" PREDICTING DIFFICULTY")
     print(f"   User ID: {user_id}")
@@ -105,7 +104,6 @@ def predict_difficulty(user_id, quiz_id):
 
     print(f"   Prediction: {prediction} (type: {type(prediction).__name__})")
     print("="*60)
-    # ============================================================
 
     return prediction or _rule_based_predict(last_score)
 

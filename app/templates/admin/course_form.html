@@ -3,20 +3,19 @@
 {% block content %}
 
 <style>
-  /* Simple styles a student would write */
   body {
-    font-family: Arial, Helvetica, sans-serif; /* Old school font */
+    font-family: Arial, Helvetica, sans-serif;
   }
   .student-form-box {
     background-color: #fff;
-    border: 1px solid #ddd; /* Basic, slightly outdated border */
+    border: 1px solid #ddd;
     padding: 20px;
     margin-bottom: 20px;
   }
   h2 {
     color: #333;
     margin-bottom: 20px;
-    border-bottom: 2px solid #eee; /* Old-school underline */
+    border-bottom: 2px solid #eee;
     padding-bottom: 10px;
   }
   .section-title {
@@ -67,9 +66,6 @@
         <input type="text" name="skills" class="form-control" value="{{ course.skills if course else '' }}" placeholder="e.g. Excel, Data Analysis">
       </div>
 
-
-
-      <!-- Basic default Bootstrap Blue button, not custom teal -->
       <button type="submit" class="btn btn-primary">{{ 'Save changes' if course else 'Create course' }}</button>
       <br><br>
     </form>
@@ -88,7 +84,6 @@
     <li class="list-group-item d-flex justify-content-between align-items-center">
       {{ lesson.order_index }}. {{ lesson.title }}
 
-      <!-- Typical student messy spacing: just sticking buttons side by side with default padding -->
       <div>
         <a href="{{ url_for('admin.lesson_edit', lesson_id=lesson.id) }}" class="btn btn-outline-secondary btn-sm" style="margin-right: 5px;">Edit</a>
 

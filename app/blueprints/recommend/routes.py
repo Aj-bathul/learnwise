@@ -61,7 +61,7 @@ def home():
 
     if not suggestions:
         # Fallback when no API key is set, or student hasn't completed a course yet:
-        # simple DB-based suggestion by matching category/interest, no AI call needed.
+
         suggestions = candidates[:3]
 
     return render_template(

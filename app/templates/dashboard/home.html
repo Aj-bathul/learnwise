@@ -19,15 +19,15 @@
         <small class="font-monospace mb-3">{{ e.progress_percent }}% complete &middot; {{ e.status }}</small>
 
         <!-- CTA Button -->
-        <div class="mt-auto">
+        <div class="mt-auto pt-3">
           {% if e.progress_percent >= 100 %}
           <!-- Completed Course -->
-          <a href="{{ url_for('courses.detail', course_id=e.course.id) }}" class="btn btn-success btn-sm w-100">
+          <a href="{{ url_for('courses.detail', course_id=e.course.id) }}" class="btn btn-success btn-lg w-100">
             &#10003; Review course
           </a>
           {% else %}
           <!-- In-Progress Course -->
-          <a href="{{ url_for('courses.detail', course_id=e.course.id) }}" class="btn btn-primary btn-sm w-100">
+          <a href="{{ url_for('courses.detail', course_id=e.course.id) }}" class="btn btn-success btn-lg w-100">
             Continue learning
           </a>
           {% endif %}

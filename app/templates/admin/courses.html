@@ -17,17 +17,11 @@
     <td>{{ c.lessons|length }}</td>
     <td>{{ c.quizzes|length }}</td>
     <td>
-      <!-- Flex container keeps them side by side with a tiny gap -->
       <div class="d-flex gap-1">
-
-        <!-- Standard Bootstrap Outline Secondary (Matches your gray "Edit" button) -->
         <a href="{{ url_for('admin.course_edit', course_id=c.id) }}" class="btn btn-sm btn-outline-secondary" style="min-width: 75px;">Edit</a>
-
-        <!-- Standard Bootstrap Outline Danger (Matches your red "Delete" button) -->
         <form method="POST" action="{{ url_for('admin.course_delete', course_id=c.id) }}" class="d-inline" onsubmit="return confirm('Delete this course?');">
           <button type="submit" class="btn btn-sm btn-outline-danger" style="min-width: 75px;">Delete</button>
         </form>
-
       </div>
     </td>
   </tr>
