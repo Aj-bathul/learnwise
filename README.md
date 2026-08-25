@@ -25,7 +25,7 @@ continues to work even if the Machine Learning model is unavailable.
 
 ## Installation and Setup
 
-1. Clone the repository using the command git clone https://github.com/YOUR_USERNAME/learnwise.git.
+1. Clone the repository using the command git clone https://github.com/Aj-bathul/learnwise.git.
 
 2. Create a virtual environment using the command python -m venv venv. On Windows, activate it using venv\Scripts\activate. On Mac or Linux, activate it using source venv/bin/activate.
 
