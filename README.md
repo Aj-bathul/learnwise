@@ -39,6 +39,4 @@ continues to work even if the Machine Learning model is unavailable.
 
 7. Run the application using the command python run.py.
 
-## License
 
-This project was developed for academic purposes 
