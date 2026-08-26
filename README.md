@@ -35,7 +35,7 @@ Best Model:Gradient Boosting
 Best Parameters: learning_rate = 0.2, n_estimators = 200
 Final Accuracy:62.86%
 Full Training Script: `/scripts/train_difficulty_model.py`
-- 
+
 ## Installation and Setup
 
 1. Clone the repository using the command git clone https://github.com/Aj-bathul/learnwise.git.
