@@ -20,7 +20,7 @@ Object Relational Mapping is handled by Flask-SQLAlchemy. Frontend uses HTML, CS
 The adaptive quiz difficulty engine was trained on the Open University Learning
 Analytics Dataset (OULAD). Four models were compared: Logistic Regression, Decision Tree,
 Random Forest, and Gradient Boosting. Gradient Boosting was selected as the final deployed model with the 
-highest accuracy of 62.64 percent. A rule-based fallback system is also included to ensure the quiz system 
+highest accuracy of 62.86 percent. A rule-based fallback system is also included to ensure the quiz system 
 continues to work even if the Machine Learning model is unavailable.
 
 
@@ -32,8 +32,8 @@ applied to the final Gradient Boosting model. After tuning, Gradient Boosting wa
 model and was selected for deployment.
 
 Best Model:Gradient Boosting 
-Best Parameters: learning_rate = 0.1, n_estimators = 100 
-Final Accuracy:62.64%
+Best Parameters: learning_rate = 0.2, n_estimators = 200
+Final Accuracy:62.86%
 Full Training Script: `/scripts/train_difficulty_model.py`
 - 
 ## Installation and Setup
