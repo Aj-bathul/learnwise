@@ -38,7 +38,7 @@ Full Training Script: `/scripts/train_difficulty_model.py`
 - 
 ## Installation and Setup
 
-1. Clone the repository using the command git clone https://github.com/YOUR_USERNAME/learnwise.git.
+1. Clone the repository using the command git clone https://github.com/Aj-bathul/learnwise.git.
 
 2. Create a virtual environment using the command python -m venv venv. On Windows, activate it using venv\Scripts\activate. On Mac or Linux, activate it using source venv/bin/activate.
 
@@ -52,6 +52,4 @@ Full Training Script: `/scripts/train_difficulty_model.py`
 
 7. Run the application using the command python run.py.
 
-## License
 
-This project was developed for academic purposes 
