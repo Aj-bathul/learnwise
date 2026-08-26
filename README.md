@@ -23,6 +23,19 @@ Random Forest, and Gradient Boosting. Gradient Boosting was selected as the fina
 highest accuracy of 62.64 percent. A rule-based fallback system is also included to ensure the quiz system 
 continues to work even if the Machine Learning model is unavailable.
 
+
+## Hyperparameter Tuning
+
+Hyperparameter tuning was performed using GridSearchCV across all four model architectures to optimize performance.
+The best parameters identified were 
+applied to the final Gradient Boosting model. After tuning, Gradient Boosting was confirmed as the best-performing
+model and was selected for deployment.
+
+Best Model:Gradient Boosting 
+Best Parameters: learning_rate = 0.1, n_estimators = 100 
+Final Accuracy:62.64%
+Full Training Script: `/scripts/train_difficulty_model.py`
+- 
 ## Installation and Setup
 
 1. Clone the repository using the command git clone https://github.com/YOUR_USERNAME/learnwise.git.

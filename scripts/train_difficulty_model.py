@@ -61,8 +61,7 @@ y = df["next_difficulty"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
-X_train = X_train[:30000]
-y_train = y_train[:30000]
+
 
 preprocessor = ColumnTransformer([
     ("num", StandardScaler(), NUMERIC),
