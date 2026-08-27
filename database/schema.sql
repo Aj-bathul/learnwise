@@ -6,7 +6,7 @@ USE learnwise;
 
 CREATE TABLE roles (
     id          INT AUTO_INCREMENT PRIMARY KEY,
-    name        VARCHAR(20) NOT NULL UNIQUE   -- 'student', 'admin'
+    name        VARCHAR(20) NOT NULL UNIQUE  
 );
 
 INSERT INTO roles (name) VALUES ('student'), ('admin');
@@ -18,7 +18,7 @@ CREATE TABLE users (
     email           VARCHAR(150) NOT NULL UNIQUE,
     password_hash   VARCHAR(255) NOT NULL,
     role_id         INT NOT NULL,
-    interests       VARCHAR(255) NULL,          -- comma-separated, used by recommender
+    interests       VARCHAR(255) NULL,          
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
@@ -26,7 +26,7 @@ CREATE TABLE users (
 
 CREATE TABLE courses (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
-    source_course_id    VARCHAR(100) NULL,      -- original id/slug from Kaggle dataset
+    source_course_id    VARCHAR(100) NULL,      
     title               VARCHAR(255) NOT NULL,
     organization        VARCHAR(150) NULL,
     description         TEXT,
@@ -113,7 +113,7 @@ CREATE TABLE ml_predictions (
     user_id            INT NOT NULL,
     quiz_attempt_id    INT NOT NULL,
     predicted_difficulty ENUM('Easy','Medium','Hard') NOT NULL,
-    model_used         VARCHAR(50) NOT NULL,     -- 'LogisticRegression' / 'RandomForest'
+    model_used         VARCHAR(50) NOT NULL,   
     confidence_score   DECIMAL(5,4) NULL,
     created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
